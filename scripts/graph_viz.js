@@ -335,13 +335,11 @@ var graph_viz = (function () {
 		_simulation.force("y", d3.forceY().strength(function (d) {
 			return force_y;
 		}))
-			.force("x", d3.forceX().strength(function (d) {
-				return force_x;
-			}));
+		.force("x", d3.forceX().strength(function (d) {
+			return force_x;
+		}));
 		return _simulation;
 	}
-
-
 
 	//////////////////////////////////////
 	function refresh_data(d, center_f, with_active_node) {
@@ -366,66 +364,48 @@ var graph_viz = (function () {
 		all_edgepaths.exit().classed("old_edgepath0", true).classed("active_edgepath", false);
 		all_edgelabels.exit().classed("old_edgelabel0", true).classed("active_edgelabel", false);
 
-
 		// handling active links associated to the data
 		var edgepaths_e = all_edgepaths.enter(),
 			edgelabels_e = all_edgelabels.enter(),
 			link_e = all_links.enter();
+		
 		var decor_out = graphShapes.decorate_link(link_e, edgepaths_e, edgelabels_e);
 		_links = decor_out[0];
 
-		var edgepaths = decor_out[1],
+		var edgepaths = decor_out[1], 
 			edgelabels = decor_out[2];
 
-
-		// previous links plus new links are merged
 		_links = _links.merge(all_links);
 		edgepaths = edgepaths.merge(all_edgepaths);
 		edgelabels = edgelabels.merge(all_edgelabels);
-
-		///////////////////////////////////
 		// node handling
-
 		var all_nodes = svg_graph.selectAll("g").filter(".active_node")
 			.data(_Nodes, function (d) { return d.id; });
-
-		//console.log(data_node);
-		// old nodes not active any more are tagged
+		
 		all_nodes.exit().classed("old_node0", true).classed("active_node", false);//;attr("class","old_node0");
-
-
 		// nodes associated to the data are constructed
 		_nodes = all_nodes.enter();
-
 		// add node decoration
 		var node_deco = graphShapes.decorate_node(_nodes, with_active_node);
-
 		var _nodes = node_deco.merge(all_nodes);
-
-
 		var focus_node_data = d3.select(".focus_node").data();
 		if (focus_node_data.length > 0){
 			infobox.display_info(focus_node_data[0]);
 		}
-		//////////////////////////////////
+
 		// Additional clean up
 		graphShapes.decorate_old_elements(layers.depth());
 		svg_graph.selectAll("g").filter(".pinned").moveToFront();
-
 
 		layers.remove_duplicates(".active_node", ".old_node");
 		layers.remove_duplicates(".active_edge", ".old_edge");
 		layers.remove_duplicates(".active_edgepath", ".old_edgepath");
 		layers.remove_duplicates(".active_edgelabel", ".old_edgelabel");
 
-
 		///////////////////////////////
 		// Force simulation
 		// simulation model and parameters
-
-
 		_simulation = simulation_start(center_f);
-		// Associate the simulation with the data
 		_simulation.nodes(_Nodes).on("tick", ticked);
 		_simulation.force("link").links(_Links);
 		_simulation.alphaTarget(0);
@@ -529,7 +509,11 @@ var graph_viz = (function () {
 			d3.select(".focus_node").remove();
 			var input = document.getElementById("freeze-in");
 			var isChecked = input.checked;
-			if (isChecked) infobox.display_info(d);
+			
+			if (isChecked){
+				// TODO: ADD SEARCH QUERY
+				graphioGremlin.query_properties(d);
+			}
 			else {
 				_simulation.stop();
 				// remove the oldest links and nodes
@@ -543,7 +527,6 @@ var graph_viz = (function () {
 				console.log('event!!')
 			}
 		}
-
 
 		function pin_it(d) {
 			d3.event.stopPropagation();

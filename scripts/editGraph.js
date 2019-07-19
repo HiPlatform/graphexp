@@ -67,9 +67,7 @@
 		
 		let vertexId = $('#vertexId').val();
 		let vertexPropertyName_1 = $('#vertexPropertyName_1').val();
-	//	vertexPropertyName_1 = vertexPropertyName_1.replace(/\s/g,'');
 		let vertexPropertyValue_1 = $('#vertexPropertyValue_1').val();
-	//	vertexPropertyValue_1 = vertexPropertyValue_1.replace(/\s/g,'');
 		propertyName = vertexPropertyName_1.split(",");
 		propertyValue = vertexPropertyValue_1.split(",");
 		var valueLen = propertyValue.length;
@@ -82,15 +80,16 @@
 			document.getElementById('vertexPropertyName_1').value='';
 			document.getElementById('vertexPropertyValue_1').value='';
 			var gremlin_query = "g.V('"+vertexId+"')"
+
 			for(count =0; count<nameLen; count++){
 				gremlin_query=gremlin_query+".property('"+propertyName[count]+"' , '" + propertyValue[count]+ "')"
-		}
-		console.log(gremlin_query)
-		var message=""
-		graphioGremlin.send_to_server(gremlin_query, 'editGraph', null, message);
-		console.log("Edit Vertex")
-		//window.alert("Vertex Edited Succesfully")
-		editGraph();
+			}
+
+			console.log(gremlin_query)
+			var message="";
+			
+			graphioGremlin.send_to_server(gremlin_query, 'editGraph', null, message);			
+			editGraph();
 		}
 	}
 	

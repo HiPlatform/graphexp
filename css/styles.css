@@ -9,7 +9,13 @@ body
 	color: #333;
 	background-color: #eee;
 	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
-	height: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: 100%;
+	overflow: hidden;
+	position: relative;
 }
 
 h1,h2,h3,h4,h5,h6
@@ -28,8 +34,8 @@ h6 { font-size: .875em; } /* 14px */
 
 p
 {
-	margin: 0 0 1.5em;
-	line-height: 1.5;
+	/* margin: 0 0 1.5em; */
+	/* line-height: 1.5; */
 }
 
 blockquote
@@ -53,12 +59,13 @@ table
 	background-color: transparent;
 	border-spacing: 0;
 	border-collapse: collapse;
+	width: 100%;
 	border-top: 1px solid #ddd;
 }
 
 th, td
 {
-	padding: .5em 1em;
+	padding: .5em .1em;
 	vertical-align: top;
 	text-align: left;
 	border-bottom: 1px solid #ddd;
@@ -91,13 +98,13 @@ Layout styles
 {
 	color: #ddd;
 	background: #000;
-	padding: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .container
 {
-	padding: 1em 1.25em;
-	margin: 0 auto;
+	padding: 0.25em;
 }
 
 .nav.container {
@@ -118,13 +125,17 @@ Layout styles
 	grid-template-columns: auto auto auto auto;
 	grid-auto-flow: row;
 }
+
 .nav.input_unit_container {
 	padding: 5px;
-	align-self: center;
 }
 
-.nav.input_label {
-	white-space:nowrap;
+.nav.input_unit_container label{
+	font-size: 12px;
+}
+
+.nav.input_unit_container input{
+	font-size: 12px;
 }
 
 .nav.controls {
@@ -137,45 +148,42 @@ Layout styles
 {
 	padding: 0em 0em;
 	background-color: #fff;
-	height: 80vh;
+	/* justify-content: space-around; */
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	height: 100%;
+	width: 100%;
 }
 
 .main, .aside
 {
-	margin-bottom: 1em;
-	padding: 0em;
-	font: 12px sans-serif;
 }
 
 .main
 {
-	position: absolute;
-	left: 0;
+	display: flex;
 	width: 100%;
-	height: 80vh;
+	height: 100%;
+	background: white;
 }
 
 .left_bar
-{
-	position: absolute;
-	left: 0;
-	margin-left: 1em;
-	max-width: 275px;
-}
+{left: 0;}
 
 .right_bar
 {
 	position: absolute;
 	right: 0;
-	margin-right: 1em;
+	/* margin-right: 1em; */
 	max-width: 275px;
 }
 
 .footer
 {
-	position: absolute;
-	bottom: 0;
+	display: flex;
 	width: 100%;
+	justify-content: center;
 	color: #fff;
 	background: #000;
 }
@@ -230,6 +238,15 @@ Nav
 /* -----------------------
 Side styles
 ------------------------*/
+.aside {
+	display: flex;
+	position: absolute;
+	flex-direction:column;
+	overflow-y: auto;
+	max-height: 100%;
+	width: 300px;
+	font-size: 12px;
+}
 .aside li
 {
 	padding-left: 0;
@@ -238,7 +255,7 @@ Side styles
 }
 .aside div
 {
-	margin: 1em 0 1em 0;
+	margin: 1em 5px 1em 5px;
 }
 /* -----------------------
 Single styles
@@ -308,41 +325,4 @@ Single styles
 	display: inline-block;
 	padding-right: 5px;
 	padding-left: 5px;
-}
-
-/* -----------------------
-Wide styles
-------------------------*/
-
-@media (min-width: 55em)
-{
-	.header { padding: 0.2em 3em; }
-	.nav-bar { padding: 0.5em 3em; }
-	.content { padding: 0em 0em; }
-
-	.main
-	{
-		margin-right: 0%;
-		margin-bottom: 1em;
-	}
-
-	.aside
-	{
-		float: left;
-		margin-bottom: 1em;
-		margin-top: 1em;
-	}
-	
-	.nav li
-	{
-		display: inline;
-		margin: 0 1em 0 0;
-	}
-	
-	.nav a
-	{
-		display: inline;
-		padding: 0;
-		border-bottom: 0;
-	}
 }

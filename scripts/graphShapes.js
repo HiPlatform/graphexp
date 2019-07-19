@@ -15,7 +15,6 @@ limitations under the License.
 */
 
 // Module for setting the shape and actions of the nodes and edges.
-
 var graphShapes = (function(){
 	"use strict";
 
@@ -160,7 +159,6 @@ var graphShapes = (function(){
 				.on("drag", graph_viz.graph_events.dragged)
 				.on("end", graph_viz.graph_events.dragended));
 
-
 	  	node.on("click", graph_viz.graph_events.clicked)
 			.on("mouseover", function(){
 				d3.select(this).select(".Pin").style("visibility", "visible");
@@ -263,10 +261,7 @@ var graphShapes = (function(){
 			d3.select(this).selectAll(".text_details").style("visibility", "hidden");
 		  })
 		  .on("click", function(d){console.log('edge clicked!');infobox.display_info(d);});
-
 	}
-
-
 
 	function decorate_old_elements(nb_layers){
 		// Decrease the opacity of nodes and edges when they get old

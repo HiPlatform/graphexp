@@ -108,8 +108,7 @@ var infobox = (function(){
 	function _display_IDinfo(d){
 		_table_IDinfo.select("tbody").remove();
 	  	var info_table = _table_IDinfo.append("tbody");
-	  	// Keep only the entries in id_keys, to display
-	  	var id_keys = ["id","label"];
+	  	var id_keys = ["id", "label"];
 	  	var data_dic = {}
 	  	for (var key in id_keys){
 	  		data_dic[id_keys[key]] = d[id_keys[key]]
@@ -120,12 +119,11 @@ var infobox = (function(){
 
     function _display_DBinfo(d) {
         _table_DBinfo.select("tbody").remove();
-        var info_table = _table_DBinfo.append("tbody");
-	 	if (d.type=='vertex'){
-	 		//console.log('display node data')
-	 		//console.log(d)
+		var info_table = _table_DBinfo.append("tbody");
+				 
+		if (d.type == 'vertex'){
 		 	for (var key in d.properties){
-		 		_display_vertex_properties(key,d.properties[key],info_table)
+		 		_display_vertex_properties(key,d.properties[key], info_table)
 		 	}
 		}
 		else {
