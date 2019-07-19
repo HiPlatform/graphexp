@@ -102,7 +102,10 @@ var graphioGremlin = (function(){
 			has_str = ".hasLabel('" + label_field + "')";
 		}
 		if (input_field !== "" && input_string !== "") {
-			has_str += ".has('" + input_field + "',";
+			if(input_field === "id")
+				has_str += ".has(id ,";
+			else
+				has_str += ".has('" + input_field + "',";
 			switch (search_type) {
 				case "eq":
 					if (isInt(input_string)){
